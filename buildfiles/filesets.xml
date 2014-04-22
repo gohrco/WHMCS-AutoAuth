@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
+	
+	<import file="functions.xml" />
+	
 	<target name="fileSets" depends="buildProperties">
-		
+
 		<!-- This defines the development source -->
 		<fileset dir="${src.dev}/" id="devSource">
 			<include name="**/*.*" />
@@ -17,10 +20,10 @@
 			<exclude name=".settings" />
 			<exclude name=".settings/*" />
 		</fileset>
-		
+
 		<!-- This defines the development source that should not be scrubbed -->
 		<fileset dir="${src.dev}/" id="devImages" />
-		
+
 		<!-- ============================ -->
 		<!-- These are the build filesets -->
 		<!-- ============================ -->
@@ -29,15 +32,15 @@
 			<include name="**" />
 			<include name="**/*.*" />
 		</fileset>
-		
+
 		<fileset dir="${src.build}/joomla/plugins/user/" id="buildSourceJoomlaUserPlg">
 			<include name="*.*" />
 		</fileset>
-		
+
 		<fileset dir="${dst.archive}/joomla/plugins/user/" id="archiveUserfiles">
 			<include name="*.*" />
 		</fileset>
-		
+
 		<fileset dir="${src.build}/joomla/plugins/user/" id="srcFilesUser">
 			<include name="*.*" />
 		</fileset>

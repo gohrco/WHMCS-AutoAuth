@@ -1,48 +1,51 @@
 <project>
 
 	<target name="buildProperties">
-		
+
 		<property name="root.file" location="Root.Properties" />
 		<property file="${root.file}" prefix="r" />
-		
+
 		<property name="project.file" location="Project.Properties" />
 		<property file="${project.file}" prefix="p" />
-		
+
 		<property name="version.file" location="Version.Properties" />
 		<property file="${version.file}" prefix="v" />
-		
+
 		<property name="localhost.file" location="Localhost.Properties" />
 		<property file="${localhost.file}" prefix="l" />
-		
+
 		<property name="src.dev" value="${r.ROOT_DEVDIR}${p.PROJECT_PATH}" />
 		<property name="dst.build" value="${r.ROOT_BUILD}v${v.VERSION_REVLONG}" />
 		<property name="dst.archive" value="${r.ROOT_ARCHIVE}v${v.VERSION_REVLONG}" />
 		<property name="src.build" value="${dst.build}" />
-		
+
 		<tstamp>
 			<format property="TODAY" pattern="yyyy MMMM d" />
 		</tstamp>
-		
+
 		<condition property="runinstall">
 			<equals arg1="${l.LOCALHOST_INSTALLED}" arg2="true" />
 		</condition>
-		
+
 		<condition property="ajaxform">
 			<or>
 				<equals arg1="${l.LOCALHOST_WHMCSVERS}" arg2="4.3.1" />
 				<equals arg1="${l.LOCALHOST_WHMCSVERS}" arg2="4.4.1" />
 			</or>
 		</condition>
-		
+
 		<condition property="pricinginstall">
 			<equals arg1="${l.LOCALHOST_PRICING}" arg2="true" />
 		</condition>
-		
+
 		<property name="local.site" value="${l.LOCALHOST_JDIR}/components/com_jwhmcs" />
-		<property name="local.admin" value="${l.LOCALHOST_JDIR}/administrator/components/com_jwhmcs" />
+		<property name="local.admin"
+			value="${l.LOCALHOST_JDIR}/administrator/components/com_jwhmcs" />
 		<property name="local.langsite" value="${l.LOCALHOST_JDIR}/language/en-GB" />
-		<property name="local.langadmin" value="${l.LOCALHOST_JDIR}/administrator/language/en-GB" />
-		<property name="local.helpadmin" value="${l.LOCALHOST_JDIR}/administrator/components/com_jwhmcs/help" />
+		<property name="local.langadmin"
+			value="${l.LOCALHOST_JDIR}/administrator/language/en-GB" />
+		<property name="local.helpadmin"
+			value="${l.LOCALHOST_JDIR}/administrator/components/com_jwhmcs/help" />
 		<property name="local.modlogin" value="${l.LOCALHOST_JDIR}/modules/mod_jwhmcslogin" />
 		<property name="local.pluginauth" value="${l.LOCALHOST_JDIR}/plugins/authentication" />
 		<property name="local.plugincont" value="${l.LOCALHOST_JDIR}/plugins/content" />
@@ -52,18 +55,18 @@
 		<property name="local.whmcs" value="${l.LOCALHOST_HOMEDIR}/whmcs" />
 		<property name="local.kayako" value="${l.LOCALHOST_HOMEDIR}/kayako" />
 	</target>
-	
+
 	<macrodef name="repl_dir">
 		<attribute name="src" default="" />
 		<attribute name="dest" default="" />
 		<attribute name="destination" default="${dst.build}/@{dest}" />
 		<attribute name="jpath" default="@jpathConfig@" />
 		<attribute name="joomla" default="@joomlaConfig@" />
-		
+
 		<sequential>
 			<delete dir="@{destination}" />
 			<mkdir dir="@{destination}" />
-			
+
 			<copy todir="@{destination}">
 				<fileset refid="@{src}" />
 				<filterchain>
@@ -83,9 +86,9 @@
 				</filterchain>
 			</copy>
 		</sequential>
-		
+
 	</macrodef>
-	
+
 	<macrodef name="repl_file">
 		<attribute name="src" default="" />
 		<attribute name="dest" default="" />
@@ -93,7 +96,7 @@
 		<attribute name="destination" default="${dst.build}/@{dest}" />
 		<attribute name="jpath" default="@jpathConfig@" />
 		<attribute name="joomla" default="@joomlaConfig@" />
-		
+
 		<sequential>
 			<copy file="@{source}" tofile="@{destination}">
 				<filterchain>
@@ -113,16 +116,16 @@
 				</filterchain>
 			</copy>
 		</sequential>
-		
+
 	</macrodef>
-	
+
 	<macrodef name="zipr_file">
 		<attribute name="srcid" default="" />
 		<attribute name="dest" default="" />
 		<attribute name="file" default="" />
 		<attribute name="destdir" default="${dst.archive}/@{dest}" />
 		<attribute name="destination" default="@{destdir}/@{file}" />
-		
+
 		<sequential>
 			<mkdir dir="@{destdir}" />
 			<delete file="@{destination}" quiet="true" />
