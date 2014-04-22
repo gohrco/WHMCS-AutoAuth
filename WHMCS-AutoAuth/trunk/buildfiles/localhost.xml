@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="Integrator" default="copyFiles" basedir=".">
-	
+
 	<import file="filesets.xml" />
 	<import file="functions.xml" />
-	
+
 	<!-- Copy all files into place (except WHMCS installed files) -->
 	<target name="copyFiles" depends="buildProperties, fileSets">
-		
+
 		<copy todir="${local.pluginuser}">
 			<fileset refid="srcFilesUser" />
 		</copy>
-		
+
 	</target>
-	
+
 </project>

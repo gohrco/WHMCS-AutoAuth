@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="Integrator" default="archiveProject" basedir=".">
-	
+
 	<import file="filesets.xml" />
 	<import file="functions.xml" />
-	
+
 	<target name="archiveProject" depends="buildProperties">
-		
+
 		<fileset dir="${src.build}/joomla/plugins/user/" id="buildSourceJoomlaUserPlg">
 			<include name="**/*.*" />
 		</fileset>
-		
+
 		<fileset dir="${dst.archive}/joomla/plugins/user/" id="archiveUserfiles">
 			<include name="**/*.*" />
 		</fileset>
-		
+
 		<copy todir="${dst.archive}/joomla/plugins/user">
 			<fileset refid="buildSourceJoomlaUserPlg" />
 		</copy>
-		
-		<zipr_file srcid="archiveUserfiles" dest="" file="plg_whmcsautoauth_v${v.VERSION_REVSHRT}.zip" />
-		
+
+		<zipr_file srcid="archiveUserfiles" dest=""
+			file="plg_whmcsautoauth_v${v.VERSION_REVSHRT}.zip" />
+
 		<delete dir="${dst.archive}/joomla" />
-		
+
 	</target>
-	
+
 </project>
