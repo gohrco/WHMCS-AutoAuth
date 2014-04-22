@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Integrator" default="buildProject" basedir=".">
+	
+	<import file="filesets.xml" />
+	<import file="functions.xml" />
+	
+	<target name="buildProject" depends="buildProperties">
+		
+		<echo message="Copying unencoded source to unencoded build directory" />
+		<fileset dir="${src.dev}/" id="devSource">
+			<include name="**/*.*" />
+			<exclude name="buildfiles/*.*" />
+			<exclude name=".*/*.*" />
+			<exclude name=".*" />
+			</fileset>
+		
+		<fileset dir="${src.dev}/" id="devImages" />
+		
+		<repl_dir src="devSource" dest="" />
+		
+		<!-- <copy todir="${dst.build}"> -->
+		<!-- 	<fileset refid="devImages" /> -->
+		<!-- </copy> -->
+		
+	</target>
+	
+</project>
