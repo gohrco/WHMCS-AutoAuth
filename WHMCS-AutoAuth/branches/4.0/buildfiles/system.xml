@@ -1,0 +1,43 @@
+<project>
+
+	<target name="properties_system">
+		
+		<property name="src.dev" value="${local.LOCATION_ROOTDIR}${project.PATH}" />
+		<property name="dst.build" value="${local.LOCATION_BUILDDIR}v${project.VERSION}" />
+		<property name="dst.package" value="${local.LOCATION_PACKAGES}v${project.VERSION}" />
+		<property name="dst.documentation" value="${local.LOCATION_DOCUMENTATION}" />
+		<property name="src.build" value="${dst.build}" />
+		
+		<tstamp>
+			<format property="TODAY" pattern="yyyy MMMM d" />
+			<format property="RELDATE" pattern="yyyy-MM-dd" />
+		</tstamp>
+		
+		<random max="1000000000" property="result" />
+		<property name="checkstring" value="${result}" />
+		
+		<!-- Copy Level Properties -->
+		<property name="local.joomla2" value="${local.LOCATION_LOCALHOME}joomla2/" />
+		<property name="local.joomla3" value="${local.LOCATION_LOCALHOME}joomla3/" />
+		
+		<!-- Packaging Level Properties -->
+		
+	</target>
+	
+	<!-- Random Number Generator -->
+	<scriptdef language="javascript" manager="javax" name="random">
+	<attribute name="max" />
+	<attribute name="property" />
+var max=attributes.get("max");
+var property=attributes.get("property");
+
+if(max==null|| property==null) {
+	self.fail("'property'or 'max'is not set");
+}
+else {
+	var result=java.util.Random().nextInt(max);
+	project.setNewProperty(property, result);
+}
+</scriptdef>
+
+</project>

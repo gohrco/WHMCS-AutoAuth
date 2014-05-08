@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Copy - Joomla" basedir=".">
+	
+	<import file="joomla2.xml" />
+	<import file="joomla3.xml" />
+	
+	<target name="copy_to_joomla_2" if="copy.joomla2">
+		<echo message="-----------------------------------------------------" />
+		<echo message="Begin Copying WHMCS AutoAuth to Joomla! 2.5" />
+		<echo message=" " />
+		<antcall target="copy_component_to_joomla2" />
+		<antcall target="copy_modules_to_joomla2" />
+		<antcall target="copy_plugins_to_joomla2" />
+		<echo message=" " />
+		<echo message="Completed Copying WHMCS AutoAuth to Joomla! 2.5" />
+		<echo message="-----------------------------------------------------" />
+	</target>
+	
+	<target name="copy_to_joomla_3" if="copy.joomla3">
+		<echo message="-----------------------------------------------------" />
+		<echo message="Begin Copying WHMCS AutoAuth to Joomla! 3.x" />
+		<echo message=" " />
+		<antcall target="copy_component_to_joomla3" />
+		<antcall target="copy_modules_to_joomla3" />
+		<antcall target="copy_plugins_to_joomla3" />
+		<echo message=" " />
+		<echo message="Completed Copying WHMCS AutoAuth to Joomla! 3.x" />
+		<echo message="-----------------------------------------------------" />
+	</target>
+	
+</project>

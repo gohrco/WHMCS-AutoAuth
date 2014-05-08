@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Module: Copy All" basedir=".">
+	
+	<import file="../includes.xml" />
+	
+	<!-- Include individual files now -->
+	<import file="joomla.xml" />
+	
+	<target name="copy_all" depends="properties">
+		<property name="copy.joomla2" value="true" />
+		<property name="copy.joomla3" value="true" />
+		<antcall target="copy_to_joomla_2" />
+		<antcall target="copy_to_joomla_3" />
+	</target>
+	
+</project>

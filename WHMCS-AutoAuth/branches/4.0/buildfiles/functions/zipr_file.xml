@@ -1,0 +1,19 @@
+<project>
+
+	<macrodef name="zipr_file">
+		<attribute name="srcid" default="" />
+		<attribute name="dest" default="" />
+		<attribute name="file" default="" />
+		<attribute name="destdir" default="${dst.package}/@{dest}" />
+		<attribute name="destination" default="@{destdir}/@{file}" />
+		
+		<sequential>
+			<mkdir dir="@{destdir}" />
+			<delete file="@{destination}" quiet="true" />
+			<zip destfile="@{destination}">
+				<fileset refid="@{srcid}" />
+			</zip>
+		</sequential>
+	</macrodef>
+	
+</project>

@@ -1,0 +1,93 @@
+<project>
+	
+	<macrodef name="build_changelog">
+		<attribute name="checkfile" default="buildfiles/config.project" />
+		<attribute name="logfile" default="CHANGELOG-${project.VERSION}" />
+		<attribute name="logpath" default="buildfiles/changelogs" />
+		
+		<attribute name="usefile" default="${src.dev}/@{checkfile}" />
+		<attribute name="changelog" default="${src.dev}/@{logpath}/@{logfile}" />
+		
+		<sequential>
+			
+			<!-- Step one - grab the last commit of project file -->
+			<exec executable="svn" output="svninfo.xml">
+				<arg line="info '@{usefile}' --xml" />
+			</exec>
+			
+			<xmlproperty file="svninfo.xml" collapseattributes="true" />
+			<property name="svn.revision" value="${info.entry.commit.revision}" />
+			
+			<delete file="svninfo.xml" />
+			
+			<!-- Step two - get changelog since last commit -->
+			<property name="version.changelog" value="@{changelog}" />
+		
+			<!-- Execute SVN via command line to retrieve the log from the determined svn revision -->
+			<exec executable="svn" output="${version.changelog}">
+				<arg line="log '${src.dev}' -r ${svn.revision}:HEAD" />
+			</exec>
+			
+			<echo message="SVN:  log ${src.dev} -r ${svn.revision}:HEAD" />
+			
+		</sequential>
+		
+	</macrodef>
+	
+	<macrodef name="clean_changelog">
+		
+		<attribute name="logfile" default="CHANGELOG-${project.VERSION}" />
+		<attribute name="logpath" default="buildfiles/changelogs" />
+		<attribute name="changelog" default="${src.dev}/@{logpath}/@{logfile}" />
+		
+		<attribute name="destfile" default="/CHANGELOG" />
+		<attribute name="destpath" default="" />
+		<attribute name="destination" default="${dst.package}/@{destpath}@{destfile}" />
+		
+		<sequential>
+			
+			<!-- Step three - write log to file and remove non-log file lines -->
+			<property name="file.changelog" value="@{destination}" />
+			
+			<!-- Take log and clean it up -->
+			<copy file="@{changelog}" tofile="@{destination}">
+				
+				<filterchain>
+					<tokenfilter>
+						<filetokenizer />
+						<replaceregex pattern="-{3,}+${line.separator}" replace="" flags="gs" />
+					</tokenfilter>
+				</filterchain>
+				
+				<filterchain>
+					<tokenfilter>
+						<ignoreblank />
+					</tokenfilter>
+				</filterchain>
+				
+				<filterchain>
+					<tokenfilter>
+						<filetokenizer />
+						<replaceregex pattern="r[0-9]{1,}.+?lines?${line.separator}" replace="" flags="gs" />
+					</tokenfilter>
+				</filterchain>
+				
+				<filterchain>
+					<tokenfilter>
+						<ignoreblank />
+					</tokenfilter>
+				</filterchain>
+				
+				<filterchain>
+					<tokenfilter>
+						<filetokenizer />
+						<replaceregex pattern="\*.+?${line.separator}" replace="" flags="gs" />
+					</tokenfilter>
+				</filterchain>
+			</copy>
+			
+		</sequential>
+		
+	</macrodef>
+	
+</project>

@@ -1,0 +1,74 @@
+<project>
+
+	<macrodef name="repl_dir">
+		<!-- File Structure -->
+		<attribute name="src" default="" />
+		<attribute name="dest" default="" />
+		<attribute name="source" default="${src.dev}/@{src}" />
+		<attribute name="destination" default="${dst.build}/@{dest}" />
+		<!-- Attributes -->
+		<attribute name="project" default="${project.NAME}" />
+		<attribute name="package" default="${project.NAME}" />
+		<attribute name="version" default="${project.VERSION}" />
+		<attribute name="author" default="${project.AUTHOR}" />
+		<attribute name="email" default="${project.EMAIL}" />
+		<attribute name="link" default="${project.URL}" />
+		<attribute name="copyright" default="${project.COPYRIGHT}" />
+		<attribute name="license" default="${project.LICENSE}" />
+		<attribute name="date" default="${TODAY}" />
+		
+		<sequential>
+			<delete dir="@{destination}" />
+			<mkdir dir="@{destination}" />
+			
+			<copy todir="@{destination}">
+				<fileset dir="@{source}">
+					<exclude name=".*" />
+					<exclude name="README.rst" />
+					<exclude name=".buildfiles/**/*.*" />
+					<exclude name=".settings/**/*.*" />
+					<exclude name="**/*.png" />
+					<exclude name="**/*.jpg" />
+					<exclude name="**/*.gif" />
+					<exclude name="**/*.pdf" />
+				</fileset>
+				<filterchain>
+					<replacetokens>
+						<token key="projectName" value="@{project}" />
+						<token key="packageName" value="@{package}" />
+						<token key="packageVers" value="@{version}" />
+						<token key="packageAuth" value="@{author}" />
+						<token key="packageLink" value="@{link}" />
+						<token key="packageCopy" value="@{copyright}" />
+						<token key="packageLice" value="@{license}" />
+						<token key="packageDate" value="@{date}" />
+						<token key="fileVers" value="@{version}" />
+						<token key="fileDate" value="@{date}" />
+						<!-- Legacy Tokens Below -->
+						<token key="mainVers" value="@{version}" />
+						<token key="buildDate" value="${TODAY}" />
+						<token key="copyWrite" value="@{copyright}" />
+						<token key="buildAuthor" value="@{author}" />
+						<token key="buildEmail" value="@{email}" />
+						<token key="buildUrl" value="@{link}" />
+						<token key="buildLicense" value="@{license}" />
+					</replacetokens>
+				</filterchain>
+			</copy>
+			<copy todir="@{destination}">
+				<fileset dir="@{source}">
+					<include name=".*" />
+					<exclude name="README.rst" />
+					<exclude name=".buildfiles/**/*.*" />
+					<exclude name=".settings/**/*.*" />
+					<include name="**/*.png" />
+					<include name="**/*.jpg" />
+					<include name="**/*.gif" />
+					<include name="**/*.pdf" />
+				</fileset>
+			</copy>
+		</sequential>
+		
+	</macrodef>
+	
+</project>

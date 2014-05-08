@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Packaging" basedir=".">
+	
+	<import file="../includes.xml" />
+	
+	<!-- Include individual files now -->
+	<import file="joomla.xml" />
+	
+	<target name="packaging_all" depends="properties">
+		
+		<build_changelog />
+		
+			<echo message=" " />
+			<echo message="Begin Packaging WHMCS AutoAuth" />
+			<echo message="-----------------------------------------------------" />
+		<antcall target="package_joomla" />
+			<echo message=" " />
+			<echo message="Completed Packaging WHMCS AutoAuth" />
+			<echo message="-----------------------------------------------------" />
+			<echo message=" " />
+			<echo message=" " />
+			
+		<clean_changelog />
+		<create_release />
+		
+	</target>
+	
+</project>
