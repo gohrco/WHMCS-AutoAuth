@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+	
+	<import file="functions.xml" />
+	
+	<target name="fileSets" depends="buildProperties">
+
+		<!-- This defines the development source -->
+		<fileset dir="${src.dev}/" id="devSource">
+			<include name="**/*.*" />
+			<exclude name="buildfiles/" />
+			<exclude name="buildfiles/*.*" />
+			<exclude name="documents/" />
+			<exclude name="documents/**" />
+			<exclude name="*.*" />
+			<exclude name=".*" />
+			<exclude name=".externalToolBuilders" />
+			<exclude name=".externalToolBuilders/*" />
+			<exclude name=".settings" />
+			<exclude name=".settings/*" />
+		</fileset>
+
+		<!-- This defines the development source that should not be scrubbed -->
+		<fileset dir="${src.dev}/" id="devImages" />
+
+		<!-- ============================ -->
+		<!-- These are the build filesets -->
+		<!-- ============================ -->
+		<fileset dir="${src.build}/plugin/authentication/" id="srcFilesAuth">
+			<include name="*.*" />
+			<include name="**" />
+			<include name="**/*.*" />
+		</fileset>
+
+		<fileset dir="${src.build}/joomla/plugins/user/" id="buildSourceJoomlaUserPlg">
+			<include name="*.*" />
+		</fileset>
+
+		<fileset dir="${dst.archive}/joomla/plugins/user/" id="archiveUserfiles">
+			<include name="*.*" />
+		</fileset>
+
+		<fileset dir="${src.build}/joomla/plugins/user/" id="srcFilesUser">
+			<include name="*.*" />
+		</fileset>
+	</target>
+</project>

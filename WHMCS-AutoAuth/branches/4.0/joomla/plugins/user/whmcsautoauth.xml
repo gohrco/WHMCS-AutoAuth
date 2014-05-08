@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension version="1.6" type="plugin" method="upgrade" group="user">
+	<name>User - WHMCS AutoAuth</name>
+	<creationDate>@buildDate@</creationDate>
+	<author>@buildAuthor@</author>
+	<authorEmail>@buildEmail@</authorEmail>
+	<authorUrl>@buildUrl@</authorUrl>
+	<copyright>@copyWrite@</copyright>
+	<license>@buildLicense@</license>
+	<version>@fileVers@</version>
+	<description>PLG_USER_WHMCSAUTOAUTH_XML_DESCRIPTION</description>
+
+	<files>
+		<folder>language</folder>
+		<filename plugin="whmcsautoauth">whmcsautoauth.php</filename>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_user_whmcsautoauth.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_user_whmcsautoauth.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="version" type="hidden" default="@fileVers@"
+					label="" />
+				<field name="whmcsurl" type="text" default="" label="LABEL_WHMCSURL"
+					description="DESC_WHMCSURL" />
+				<field name="authkey" type="text" default="" label="LABEL_AUTOAUTHKEY"
+					description="DESC_AUTOAUTHKEY" />
+				<field name="gotourl" type="text" default="" label="LABEL_RETURNPAGE"
+					description="DESC_RETURNPAGE" />
+				<field name="logoutenable" type="radio" label="LABEL_ENABLELOGOUT"
+					description="DESC_ENABLELOGOUT" default="0">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="uservers" type="hidden" default="@fileVers@"
+					label="" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
