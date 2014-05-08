@@ -1,0 +1,17 @@
+NAME=WHMCS AutoAuth
+PATH=WHMCS Autoauth/
+AUTHOR=Go Higher Information Services, LLC
+EMAIL=development@gohigheris.com
+URL=https://www.gohigheris.com
+LICENSE=GNU General Public License version 2, or later
+COPYRIGHT=2009-2014 Go Higher Information Services, LLC.  All rights reserved.
+UPDATE_SITE=
+#
+SERIES=4.0
+SHORT=400
+VERSION=4.0.0
+#
+MATURITY=stable
+ACCESS=Public
+DESCRIPTION=<p>The WHMCS AutoAuth for Joomla! plugin allows you to log your users in automatically to WHMCS once they have authenticated in Joomla. The plugin is lightweight, requiring only a few parameters to set and is easy to install and uninstall.</p>
+ITEMACCESS=Registered
