@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<install version="1.6" type="plugin" method="upgrade" group="user">
+<extension version="1.6" type="plugin" method="upgrade" group="user">
 	<name>User - WHMCS AutoAuth</name>
 	<creationDate>@buildDate@</creationDate>
 	<author>@buildAuthor@</author>
@@ -42,19 +42,4 @@
 			</fieldset>
 		</fields>
 	</config>
-
-	<params>
-		<param name="version" type="hidden" default="@fileVers@" label="" />
-		<param name="whmcsurl" type="text" default="" label="LABEL_WHMCSURL"
-			description="DESC_WHMCSURL" />
-		<param name="authkey" type="text" default="" label="LABEL_AUTOAUTHKEY"
-			description="DESC_AUTOAUTHKEY" />
-		<param name="gotourl" type="text" default="" label="LABEL_RETURNPAGE"
-			description="DESC_RETURNPAGE" />
-		<param name="logoutenable" type="radio" label="LABEL_ENABLELOGOUT"
-			description="DESC_ENABLELOGOUT" default="0">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-		</param>
-	</params>
-</install>
+</extension>
