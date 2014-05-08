@@ -1,0 +1,36 @@
+<project>
+	
+	<macrodef name="create_release">
+		
+		<attribute name="releasefile" default="RELEASE-${project.VERSION}" />
+		<attribute name="thisrelease" default="releases/@{releasefile}" />
+		
+		<attribute name="destfile" default="RELEASE" />
+		<attribute name="destpath" default="" />
+		<attribute name="destination" default="${dst.package}@{destpath}/@{destfile}" />
+		
+		<attribute name="ls" default="${line.separator}" />
+		
+		<attribute name="maturity" default="${project.MATURITY}" />
+		<attribute name="access" default="${project.ACCESS}" />
+		<attribute name="description" default="${project.DESCRIPTION}" />
+		<attribute name="itemaccess" default="${project.ITEMACCESS}" />
+		<attribute name="date" default="${RELDATE}" />
+		
+		<sequential>
+			
+			<delete file="@{thisrelease}" />
+			
+			<!-- Take release info and create this version -->
+			<echo file="@{thisrelease}" append="true" message="maturity=@{maturity}@{ls}" />
+			<echo file="@{thisrelease}" append="true" message="access=@{access}@{ls}" />
+			<echo file="@{thisrelease}" append="true" message="description=@{description}@{ls}" />
+			<echo file="@{thisrelease}" append="true" message="created=@{date}@{ls}" />
+			<echo file="@{thisrelease}" append="true" message="itemaccess=@{itemaccess}@{ls}" />
+			
+			<copy file="@{thisrelease}" toFile="@{destination}" />
+			
+		</sequential>
+	</macrodef>
+	
+</project>

@@ -1,0 +1,44 @@
+<project>
+
+	<macrodef name="repl_module_file">
+		<!-- File Structure -->
+		<attribute name="src" default="" />
+		<attribute name="dest" default="" />
+		<attribute name="source" default="${src.dev}@{src}" />
+		<attribute name="destination" default="${dst.build}/@{dest}" />
+		<!-- Attributes -->
+		<attribute name="project" default="${project.NAME}" />
+		<attribute name="package" default="${project.NAME}" />
+		<attribute name="license" default="${project.LICENSE}" />
+		<attribute name="version" default="${project.VERSION}" />
+		
+		
+		<attribute name="author" default="" />
+		<attribute name="link" default="" />
+		<attribute name="copyright" default="" />
+		<attribute name="date" default="${TODAY}" />
+		
+		<sequential>
+			<delete file="@{destination}" />
+			
+			<copy file="@{source}" tofile="@{destination}">
+				<filterchain>
+					<replacetokens>
+						<token key="projectName" value="@{project}" />
+						<token key="packageName" value="@{package}" />
+						<token key="fileVers" value="@{version}" />
+						<token key="mainVers" value="@{version}" />
+						<token key="buildDate" value="${TODAY}" />
+						<token key="copyRight" value="${project.COPYRIGHT}" />
+						<token key="buildAuthor" value="${project.AUTHOR}" />
+						<token key="buildEmail" value="${project.EMAIL}" />
+						<token key="buildUrl" value="${project.URL}" />
+						<token key="buildLicense" value="@{license}" />
+					</replacetokens>
+				</filterchain>
+			</copy>
+		</sequential>
+		
+	</macrodef>
+	
+</project>

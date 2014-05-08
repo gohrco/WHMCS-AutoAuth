@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Common_Inclusion" basedir=".">
+	
+	<!-- The target that calls all the other targets so we dont have to -->
+	<target name="properties" depends="property_files,
+		properties_system" />
+	
+	<!-- Function Import -->
+	<import file="functions/build_changelog.xml" />
+	<import file="functions/create_release.xml" />
+	<import file="functions/licensing.xml" />
+	<import file="functions/ioncube_dir.xml" />
+	<import file="functions/repl_dir.xml" />
+	<import file="functions/repl_file.xml" />
+	<import file="functions/zipr_file.xml" />
+	
+	<!-- Properties Import -->
+	<import file="system.xml" />
+	
+	<!-- File Import -->
+	<target name="property_files">
+		
+		<property name="config.local" location="config.local" />
+		<property file="${config.local}" prefix="local" />
+		
+		<property name="config.project" location="config.project" />
+		<property file="${config.project}" prefix="project" />
+		
+	</target>
+	
+	<!-- Import Build Files -->
+	<import file="builds/build-all.xml" />
+	
+	<!-- Import Copy Files -->
+	<import file="localcopy/localcopy-all.xml" />
+	
+	<!-- Import Packaging Files -->
+	<import file="packaging/packaging-all.xml" />
+	
+	<!-- Dunamis Import -->
+	<!-- <import file="dunamis.xml" /> -->
+	
+</project>

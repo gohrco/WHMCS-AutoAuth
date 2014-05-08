@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Module:  Build All" basedir=".">
+	
+	<import file="../includes.xml" />
+	
+	<target name="build_all" depends="properties">
+			
+			<echo message=" " />
+			<echo message="Begin WHMCS AutoAuth Build" />
+			<echo message="-----------------------------------------------------" />
+		
+		<repl_dir src="joomla" dest="joomla" />
+		
+			<echo message=" " />
+			<echo message="Completed WHMCS AutoAuth Build" />
+			<echo message="-----------------------------------------------------" />
+			<echo message=" " />
+			<echo message=" " />
+			
+	</target> 
+	
+</project> 

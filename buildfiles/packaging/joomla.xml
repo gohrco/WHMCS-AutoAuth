@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Packaging - Joomla" basedir=".">
+	
+	<import file="../includes.xml" />
+	
+	<target name="package_joomla" depends="properties">
+		
+		<echo message="[1]  Creating Package Temporary Directory" />
+		<mkdir dir="${dst.package}/JOOMLA" />
+		<mkdir dir="${dst.package}/JOOMLA" />
+		
+		<!-- This is the User Plugin for J!WHMCS -->
+			<fileset dir="${dst.package}/JOOMLA/plugins/user" id="userpkgfiles" includes="**/*.*" />
+			<zipr_file srcid="userpkgfiles" dest="/" file="plg_whmcsautoauth_v${project.SHORT}.zip" />
+		<!-- This is the User Plugin for J!WHMCS -->
+		
+		<echo message=" " />
+		<echo message="[2]  Delete Temporary Directory" />
+		<delete dir="${dst.package}/JOOMLA" />
+		
+	</target>
+	
+</project>

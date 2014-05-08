@@ -1,0 +1,39 @@
+<project>
+	
+	<macrodef name="ioncube_file">
+		<attribute name="src" default="" />
+		<attribute name="raw" default="C:\xampp\raw.php" />
+		<attribute name="dest" default="" />
+		<attribute name="version" default="${v.VERSION_REVLONG}" />
+		
+		<sequential>
+			<delete file="@{raw}" />
+			<copy file="${src.dev}/@{src}" tofile="@{raw}">
+				<filterchain>
+					<replacetokens>
+						<token key="projectName" value="${p.PROJECT_NAME}" />
+						<token key="fileVers" value="@{version}" />
+						<token key="mainVers" value="${v.VERSION_REVMAIN}" />
+						<token key="buildDate" value="${TODAY}" />
+						<token key="copyWrite" value="${p.PROJECT_CPWRITE}" />
+						<token key="buildAuthor" value="${p.PROJECT_AUTHOR}" />
+						<token key="buildEmail" value="${p.PROJECT_EMAIL}" />
+						<token key="buildUrl" value="${p.PROJECT_URL}" />
+						<token key="buildLicense" value="${p.PROJECT_LICENSE}" />
+						<token key="jpathConfig" value="@{jpath}" />
+						<token key="joomlaConfig" value="@{joomla}" />
+						<token key="checkString" value="${checkstring}" />
+					</replacetokens>
+				</filterchain>
+			</copy>
+			<exec executable="C:\Program Files (x86)\ionCube PHP Encoder 7.0\ioncube_encoder5.exe">
+				<arg value='--preamble-file="C:\xampp\preamble.txt"' />
+				<arg value="@{raw}" />
+				<arg value="-o" />
+				<arg value="@{dest}" />
+			</exec>
+			<delete file="@{raw}" />
+		</sequential>
+	</macrodef>
+	
+</project>

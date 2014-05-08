@@ -1,0 +1,14 @@
+<!-- Location of your Eclipse Workspace -->
+LOCATION_ROOTDIR=C:/Users/Steven/workspace/
+
+<!-- Location of this projects extensions builds folder -->
+LOCATION_BUILDDIR=C:/Extensions/WHMCS_Autoauth/Builds/
+
+<!-- Location of this projects packaging folder -->
+LOCATION_PACKAGES=C:/Extensions/WHMCS_Autoauth/Archives/
+
+<!-- Location of local server root directory (not including subdirectories of specific applications -->
+LOCATION_LOCALHOME=C:/xampp/www/mods/
+
+<!-- Location of this projects extensions builds folder -->
+LOCATION_DOCUMENTATION=C:/Extensions/WHMCS_Autoauth/Documentation/

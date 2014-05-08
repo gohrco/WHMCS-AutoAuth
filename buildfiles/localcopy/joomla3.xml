@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Copy - Joomla 3.x" basedir=".">
+	
+	
+	<target name="copy_component_to_joomla3" depends="">
+		
+	</target>
+	
+	<target name="copy_modules_to_joomla3" depends="">
+		
+	</target>
+	
+	<target name="copy_plugins_to_joomla3" depends="">
+		<echo message=" " />
+		<echo message=" " />
+		<echo message=" +   Copying Joomla Plugin Files" />
+		<echo message=" " />
+		
+		<!-- User Plugin -->
+		<fileset dir="${src.build}/joomla/plugins/user/" id="userplg">
+			<include name="**/*.*" />
+			<exclude name="language/**/*.*" />
+		</fileset>
+		
+		<delete dir="${local.joomla3}/plugins/user/whmcsautoauth" />
+		<mkdir dir="${local.joomla3}/plugins/user/whmcsautoauth" />
+		
+		<copy todir="${local.joomla3}/plugins/user/whmcsautoauth">
+			<fileset refid="userplg" />
+		</copy>
+		
+		<fileset dir="${src.build}/joomla/plugins/user/language/en-GB" id="userlang" includes="**/*.*" />
+		<copy todir="${local.joomla3}/administrator/language/en-GB"><fileset refid="userlang" /></copy>
+		
+	</target>
+	
+</project>

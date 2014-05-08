@@ -1,0 +1,81 @@
+<project>
+	
+	<macrodef name="ioncube_dir">
+		<attribute name="src" default="" />
+		<attribute name="raw" default="C:\xampp\raw" />
+		<attribute name="dest" default="" />
+		<attribute name="source" default="${src.dev}/@{src}" />
+		<attribute name="destination" default="${dst.build}/@{dest}" />
+		
+		<attribute name="package" default="${project.NAME}" />
+		<attribute name="license" default="${project.LICENSE}" />
+		<attribute name="version" default="${project.VERSION}" />
+		
+		<sequential>
+			<delete dir="@{raw}" />
+			<mkdir dir="@{raw}" />
+			
+			<copy todir="@{raw}">
+				<fileset dir="@{source}">
+					<exclude name=".*" />
+					<exclude name="README.rst" />
+					<exclude name=".buildfiles/**" />
+					<exclude name=".buildfiles/**/*.*" />
+					<exclude name=".settings/**" />
+					<exclude name=".settings/**/*.*" />
+					<exclude name="**/*.png" />
+					<exclude name="**/*.jpg" />
+					<exclude name="**/*.gif" />
+					<exclude name="**/*.pdf" />
+					<exclude name="**/lang/*.php" />
+				</fileset>
+				
+				<filterchain>
+					<replacetokens>
+						<token key="projectName" value="${project.NAME}" />
+						<token key="packageName" value="@{package}" />
+						<token key="fileVers" value="@{version}" />
+						<token key="mainVers" value="@{version}" />
+						<token key="buildDate" value="${TODAY}" />
+						<token key="copyRight" value="${project.COPYRIGHT}" />
+						<token key="buildAuthor" value="${project.AUTHOR}" />
+						<token key="buildEmail" value="${project.EMAIL}" />
+						<token key="buildUrl" value="${project.URL}" />
+						<token key="buildLicense" value="@{license}" />
+						<token key="checkString" value="${checkstring}" />
+					</replacetokens>
+				</filterchain>
+			</copy>
+			
+			<delete dir="@{destination}" />
+			<mkdir dir="@{destination}" />
+			
+			<exec executable="C:\Program Files (x86)\ionCube PHP Encoder 7.0\ioncube_encoder5.exe">
+				<arg value='--preamble-file="C:\xampp\preamble.txt"' />
+				<arg value="--merge-target" />
+				<arg value='--ignore=".svn/"' />
+				<arg value="@{raw}" />
+				<arg value="-o" />
+				<arg value="@{destination}" />
+			</exec>
+			
+			<fileset dir="@{source}" id="images">
+				<exclude name="README.rst" />
+				<exclude name=".buildfiles/**/*.*" />
+				<exclude name=".settings/**/*.*" />
+				<include name="**/*.png" />
+				<include name="**/*.jpg" />
+				<include name="**/*.gif" />
+				<include name="**/*.pdf" />
+				<include name="**/lang/*.php" />
+			</fileset>
+			
+			<copy todir="@{destination}">
+				<fileset refid="images" />
+			</copy>
+			
+			<delete dir="@{raw}" />
+		</sequential>
+	</macrodef>
+	
+</project>
